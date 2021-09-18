@@ -1,25 +1,22 @@
 (ns burbulai.core
-  (:require [quil.core :as q]
+  (:require [burbulai.drawer :refer [draw]]
+            [burbulai.initial-state :refer [initial-state]]
+            [burbulai.updater :refer [update]]
+            [quil.core :as q]
             [quil.middleware :as m]))
 
 (defn setup []
   (q/frame-rate 30)
-  (q/fill 0)
-  nil)
+  (q/color-mode :hsb)
+  initial-state)
 
-(defn update [state]
-  state)
-
-(defn draw [state]
-  (q/text (pr-str state) 20 20))
-
-
-(q/defsketch burbulai
-             :title "burbulai"
-             :size [500 500]
-             :setup setup
-             :update update
-             :draw draw
-             :features [:keep-on-top]
-             :features [:exit-on-close]
-             :middleware [m/fun-mode])
+(defn -main [& _args]
+  (q/defsketch burbulai
+               :title "burbulai"
+               :size [500 500]
+               :setup setup
+               :update update
+               :draw draw
+               :features [:keep-on-top]
+               :features [:exit-on-close]
+               :middleware [m/fun-mode]))
