@@ -17,6 +17,5 @@
                :setup setup
                :update update-state
                :draw draw
-               :features [:keep-on-top]
-               :features [:exit-on-close]
+               :features [:keep-on-top :exit-on-close]
                :middleware [m/fun-mode]))
