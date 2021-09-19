@@ -1,6 +1,6 @@
 (ns burbulai.core
-  (:require [burbulai.drawer :refer [draw]]
-            [burbulai.initial-state :refer [initial-state]]
+  (:require [burbulai.constants :refer [initial-state world-height world-width]]
+            [burbulai.drawer :refer [draw]]
             [burbulai.updater :refer [update]]
             [quil.core :as q]
             [quil.middleware :as m]))
@@ -13,7 +13,7 @@
 (defn -main [& _args]
   (q/defsketch burbulai
                :title "burbulai"
-               :size [500 500]
+               :size [world-width world-height]
                :setup setup
                :update update
                :draw draw
