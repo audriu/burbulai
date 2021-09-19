@@ -11,7 +11,7 @@
         new-dy (if (or (< y 0) (> y world-height)) (- dy) dy)]
     (assoc b :x new-x :y new-y :dx new-dx :dy new-dy)))
 
-(defn update [state]
+(defn update-state [state]
   (-> state
-      (update-vals move-bubble)
-      (update-vals bounce-walls)))
+      (update :particles #(update-vals % move-bubble))
+      (update :particles #(update-vals % bounce-walls))))
