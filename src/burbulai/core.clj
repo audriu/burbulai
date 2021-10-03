@@ -1,7 +1,7 @@
 (ns burbulai.core
   (:require [burbulai.constants :refer [initial-state world-height world-width]]
             [burbulai.drawer :refer [draw]]
-            [burbulai.updater :refer [update-state]]
+            [burbulai.verlet :refer [update-state]]
             [quil.core :as q]
             [quil.middleware :as m]))
 

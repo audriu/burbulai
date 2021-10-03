@@ -1,14 +1,13 @@
-(ns burbulai.updater
+(ns burbulai.verlet
   (:require [burbulai.constants :refer [world-height world-width]]))
 
 (defn move-particle [{:keys [x y dx dy] :as b}]
-  (assoc b :x (+ x dx) :y (+ y dy)))
-
-(defn bounce-walls [{:keys [x y dx dy] :as b}]
-  (let [new-x (if (> x world-width) world-width x)
-        new-y (if (> y world-height) world-height y)
-        new-dx (if (or (< x 0) (> x world-width)) (- dx) dx)
-        new-dy (if (or (< y 0) (> y world-height)) (- dy) dy)]
+  (let [new-x (+ x dx)
+        new-dx (if (or (< new-x 0) (> new-x world-width)) (- dx) dx)
+        new-x (if (> new-x world-width) world-width new-x)
+        new-y (+ y dy)
+        new-dy (if (or (< new-y 0) (> new-y world-height)) (- dy) dy)
+        new-y (if (> new-y world-height) world-height new-y)]
     (assoc b :x new-x :y new-y :dx new-dx :dy new-dy)))
 
 (defn get-offsets [links particles]
@@ -39,5 +38,4 @@
 (defn update-state [state]
   (-> state
       (update :particles #(update-vals % move-particle))
-      (update :particles #(update-vals % bounce-walls))
       enforce-links))
